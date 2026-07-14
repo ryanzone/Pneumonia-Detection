@@ -1,8 +1,14 @@
 torch
 torchvision
 numpy
-gradio
 Pillow
 scikit-learn
 tqdm
 matplotlib
+<<<<<<< HEAD
+=======
+streamlit
+plotly
+pandas
+ipykernel
+>>>>>>> ec2e48b (feat: add inference script, documentation, and Streamlit dashboard enhancements for the pneumonia classifier)
