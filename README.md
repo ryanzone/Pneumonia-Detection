@@ -1,46 +1,58 @@
-<<<<<<< HEAD
-# 🫁 Pneumonia Detection from Chest X-Ray Images
+# 🫁 AI Chest X-Ray Pneumonia Classifier
 
-This project implements a **deep learning–based Pneumonia Detection system** using **PyTorch and Transfer Learning (ResNet-18)**.
-The model classifies chest X-ray images into **Normal** or **Pneumonia** and is deployed as an interactive **Streamlit web application** for real-time inference.
+An AI-powered diagnostic support application that classifies chest X-ray images as **Normal** or **Pneumonia** using a fine-tuned **ResNet-18** model built with **PyTorch**. The project includes a modern clinical dashboard developed with **Streamlit** for real-time inference and visualization.
 
 ---
 
 ## 📌 Project Description
 
-Pneumonia is a lung infection that can be diagnosed through chest X-ray images. Manual diagnosis requires expert analysis and may be time-consuming.
-This project aims to automate the detection process using a **Convolutional Neural Network (CNN)**, improving speed and consistency while serving as an educational demonstration of medical image classification.
+Pneumonia is a serious lung infection that can be identified through chest X-ray imaging. Manual interpretation requires experienced radiologists and can be time-consuming. This project demonstrates how deep learning can assist by automatically classifying chest X-rays into **Normal** or **Pneumonia**, providing fast predictions through an interactive web interface.
+
+> **Disclaimer:** This application is intended for **educational and research purposes only** and must **not** be used for real-world medical diagnosis.
 
 ---
 
-## 🔑 Key Features
+## 🚀 Features
 
-* Transfer learning using **ResNet-18 (ImageNet pretrained)**
-* Fine-tuning only **Layer 4 and the final fully connected layer**
-* **Class-weighted loss** to address dataset imbalance
-* Threshold-based prediction to improve pneumonia sensitivity
-* Validation-based best model saving
-* Streamlit web interface for easy image upload and prediction
-* GPU acceleration support (CUDA)
+- Fine-tuned **ResNet-18** transfer learning model
+- Layer-wise fine-tuning (Layer 4 + Fully Connected layer)
+- Weighted Cross Entropy Loss for class imbalance
+- Tuned pneumonia prediction threshold (0.35) for higher sensitivity
+- Premium GitHub Dark themed Streamlit dashboard
+- Side-by-side Original and Enhanced X-ray viewer
+- Adjustable Brightness, Contrast, and Sharpness controls
+- Interactive probability visualization
+- Downloadable diagnostic reports (.md / .txt)
+- Session history with CSV export
+- GPU (CUDA) support
 
 ---
 
 ## 🛠 Technologies Used
 
-* **Python**
-* **PyTorch & Torchvision**
-* **Scikit-learn**
-* **Streamlit**
-* **NumPy, Matplotlib**
-* **PIL (Image Processing)**
+- Python
+- PyTorch
+- Torchvision
+- Streamlit
+- Scikit-learn
+- NumPy
+- Matplotlib
+- Pillow (PIL)
 
 ---
 
-## 📂 Dataset Structure
+## 📂 Dataset
 
-```
+This project uses the **Chest X-Ray Images (Pneumonia)** dataset from Kaggle.
+
+Expected directory structure:
+
+```text
 chest_xray/
 ├── train/
+│   ├── NORMAL/
+│   └── PNEUMONIA/
+├── val/
 │   ├── NORMAL/
 │   └── PNEUMONIA/
 └── test/
@@ -48,185 +60,183 @@ chest_xray/
     └── PNEUMONIA/
 ```
 
-The dataset contains labeled chest X-ray images categorized into Normal and Pneumonia classes.
-
 ---
 
-## ⚙️ Model & Training Details
+## 🧠 Model Architecture
 
-* Base model: **ResNet-18**
-* Input size: `224 × 224`
-* Loss function: **Weighted CrossEntropyLoss**
-* Optimizer: **Adam**
-* Batch size: `64`
-* Epochs: `5`
-* Best-performing model saved as `best_model.pth`
+The model uses **Transfer Learning** with a pretrained **ResNet-18**.
 
-Only selected layers are unfrozen during training to reduce overfitting and improve generalization.
+### Training Configuration
+
+| Parameter | Value |
+|-----------|-------|
+| Base Model | ResNet-18 |
+| Input Size | 224 × 224 |
+| Optimizer | Adam |
+| Learning Rate | 1e-4 |
+| Loss | Weighted CrossEntropyLoss |
+| Batch Size | 64 |
+| Epochs | 5 |
+| Best Model | `best_model.pth` |
+
+### Fine-Tuning Strategy
+
+- Freeze Layers 1–3
+- Unfreeze Layer 4
+- Train Final Fully Connected Layer
+
+This approach preserves general ImageNet features while adapting higher-level representations for chest X-ray classification.
 
 ---
 
 ## 📊 Evaluation
 
-* Predictions generated using softmax probabilities
-* Pneumonia classification threshold set to **0.35**
-* Evaluation includes:
+The model is evaluated using:
 
-  * Confusion Matrix
-  * Precision, Recall, and F1-score
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- Confusion Matrix
 
-This threshold tuning improves detection of pneumonia cases, which is important in medical applications.
-
----
-
-## 🌐 Streamlit Web Application
-
-The trained model is deployed using **Streamlit**.
-
-**Features:**
-
-* Upload chest X-ray images (JPG / PNG)
-* Displays predicted class and confidence score
-* Shows class-wise probabilities
-* Includes medical disclaimer and system information
+Instead of the standard 0.5 decision threshold, a **0.35 threshold** is used for Pneumonia predictions to improve recall and reduce false negatives.
 
 ---
 
-## ▶️ How to Run the Project
+## 🖥 Streamlit Dashboard
 
-```bash
-pip install torch torchvision streamlit scikit-learn matplotlib pillow tqdm
-```
+The dashboard provides:
 
-```bash
-python train.py
-streamlit run app.py
-=======
-# AI Chest X-Ray Classifier
-
-An AI-powered diagnostic support application designed to classify chest X-ray images as **Normal** or **Pneumonia**. The project features a fine-tuned deep learning backend in PyTorch and a premium clinical dashboard built with Streamlit.
-
----
-
-## 🚀 Key Features
-
-* **Deep Learning Classification**: Powered by a fine-tuned **ResNet18** model trained to identify diagnostic indicators of pneumonia in chest radiographs.
-* **Refined Clinical Dashboard**: A premium GitHub Dark styled medical web application layout with soft shadows, custom sliders, and a sleek dark mode palette tailored for clear data visualization.
-* **Side-by-Side Image Viewer**: View the original X-ray alongside a real-time enhanced version.
-* **Interactive Image Adjustments**: Fine-tune Brightness, Contrast, and Sharpness on the fly for closer visual inspection.
-* **Visual Diagnosis & Probability Chart**: Get instant diagnosis feedback via soft glowing alert cards (green for Normal, red for Pneumonia) paired with an interactive probability distribution bar chart.
-* **Grouped System Information**: A dedicated sidebar showing live hardware details (CPU/GPU status, VRAM consumption) and model settings.
-* **Diagnostic Reports**: Generate and download diagnostic summary reports in Markdown (`.md`) or Plain Text (`.txt`) formats.
-* **Session Classification History**: Track classification logs locally during the session with an option to download history as a CSV file.
+- Upload chest X-ray images
+- Original & Enhanced image comparison
+- Diagnosis prediction
+- Confidence score
+- Class probability chart
+- Hardware information
+- Report generation
+- Session history
 
 ---
 
-## 🧠 Model Architecture & Training
+## 📷 Dashboard Preview
 
-The backend deep learning model is defined in `model_arch.py` and utilizes the following setup:
+### Main Dashboard
 
-* **Base Model**: Pre-trained **ResNet18** architecture from PyTorch `torchvision`.
-* **Fine-Tuning Strategy**: Feature extraction layers (Layers 1-3) are frozen to preserve generalized ImageNet representations, while **Layer 4** and the final **Fully Connected (FC) head** are unfrozen for chest X-ray domain specialization.
-* **Loss Function**: Weighted Cross-Entropy Loss, automatically adjusting class weights based on label counts to mitigate dataset class imbalance:
-  $$\text{Weight}_c = \frac{N_{\text{total}}}{N_c}$$
-* **Optimizer**: Adam optimizer with a learning rate of $1\times10^{-4}$ trained for 5 epochs.
-* **Decision Boundary**: The Pneumonia classification threshold is tuned to **$0.35$** (instead of standard $0.5$) to prioritize medical recall/sensitivity, ensuring fewer false negatives in clinical screenings.
+![Dashboard](ss/up1.png)
 
----
+### Diagnosis View
 
-## 🖼️ Dashboard Preview
+![Diagnosis](ss/up2.png)
 
-### Updated GitHub Dark Theme
-![Dashboard Overview](ss/up1.png)
-![Diagnostic Details](ss/up2.png)
-![Enhanced Image Analysis](ss/up3.png)
+### Enhanced Image Analysis
 
-### Previous Theme (For Comparison)
-![Old Dashboard](ss/old.png)
+![Enhanced](ss/up3.png)
+
+### Previous UI
+
+![Old UI](ss/old.png)
 
 ---
 
-## 📂 Project Structure
+## 📁 Project Structure
 
-```filepath
+```text
 ICM/
-├── streamlit_app.py     # Streamlit Clinical Dashboard (Web App)
-├── model_arch.py        # Model definition, Data loaders, & Training pipeline
-├── inference.py         # Lightweight script for loading model and testing images
-├── best_model.pth       # Saved model checkpoint weights (approx. 45MB)
-├── requirements.txt     # Python package dependencies
-├── confusion_matrix.png # Generated performance visualization on the validation set
-├── samples/             # Sample chest X-ray images (.jpeg) for dashboard testing
-└── chest_xray/          # Kaggle dataset directory (Normal/Pneumonia train & test splits)
+├── streamlit_app.py
+├── model_arch.py
+├── inference.py
+├── best_model.pth
+├── requirements.txt
+├── confusion_matrix.png
+├── samples/
+├── ss/
+└── chest_xray/
 ```
 
 ---
 
-## 🛠️ Installation & Setup
+## ⚙️ Installation
 
-### Prerequisites
-* Python 3.10+
-* CUDA-capable GPU (optional, but recommended for model training)
+Clone the repository:
 
-### 1. Clone & Navigate
 ```bash
 git clone <repository-url>
 cd ICM
 ```
 
-### 2. Configure Virtual Environment
-Create and activate a Python virtual environment to manage dependencies:
+Create a virtual environment:
+
+### Windows
+
 ```powershell
-# On Windows
 python -m venv venv
 .\venv\Scripts\activate
+```
 
-# On Linux/macOS
+### Linux/macOS
+
+```bash
 python -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Install Dependencies
+Install dependencies:
+
 ```bash
 pip install -r requirements.txt
->>>>>>> ec2e48b (feat: add inference script, documentation, and Streamlit dashboard enhancements for the pneumonia classifier)
 ```
 
 ---
 
-<<<<<<< HEAD
-## ⚠️ Disclaimer
+## 🏋️ Training
 
-This project is intended for **educational and research purposes only** and must not be used for real-world medical diagnosis.
+Download the Kaggle Chest X-Ray dataset and place it inside the project as:
+
+```
+chest_xray/
+```
+
+Train the model:
+
+```bash
+python model_arch.py
+```
+
+Training will:
+
+- Fine-tune ResNet-18
+- Save the best model as `best_model.pth`
+- Generate a confusion matrix
+- Print classification metrics
 
 ---
 
-=======
-## 🖥️ Running the Clinical Dashboard
+## ▶️ Running the Dashboard
 
-To launch the web interface, run the following command within your activated virtual environment:
+Launch the Streamlit application:
+
 ```bash
 streamlit run streamlit_app.py
 ```
 
-The application will build the custom CSS theme and open a browser window displaying the dashboard (usually at `http://localhost:8501`).
+Then open:
 
-### Testing the App
-1. You can upload a custom `.jpg` / `.png` chest X-ray or select one of the sample images pre-loaded in the dropdown menu.
-2. The dashboard will display the Original and Enhanced images side by side.
-3. Review the **Diagnosis Card** (showing prediction confidence) and the **Class Probabilities Chart** below the viewer.
-4. Download the clinical report or check the **History** tab to see previously logged classifications.
+```
+http://localhost:8501
+```
 
 ---
 
-## 🏋️ Training the Model from Scratch
+## 🧪 Inference
 
-If you want to re-train the classifier model:
-1. Download the [Chest X-Ray Images (Pneumonia) dataset from Kaggle](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia).
-2. Unpack the dataset into a folder named `chest_xray` in the root of the project directory.
-3. Run the training script:
+You can also test the trained model directly:
+
 ```bash
-python model_arch.py
+python inference.py
 ```
-This will train the model, tune the threshold, print a classification performance report, save the best weights to `best_model.pth`, and render the `confusion_matrix.png` plot.
->>>>>>> ec2e48b (feat: add inference script, documentation, and Streamlit dashboard enhancements for the pneumonia classifier)
+
+---
+
+## 📄 License
+
+This project is intended solely for educational and research purposes.
