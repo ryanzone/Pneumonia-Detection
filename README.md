@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🫁 Pneumonia Detection from Chest X-Ray Images
 
 This project implements a **deep learning–based Pneumonia Detection system** using **PyTorch and Transfer Learning (ResNet-18)**.
@@ -228,4 +229,4 @@ If you want to re-train the classifier model:
 python model_arch.py
 ```
 This will train the model, tune the threshold, print a classification performance report, save the best weights to `best_model.pth`, and render the `confusion_matrix.png` plot.
-
+>>>>>>> ec2e48b (feat: add inference script, documentation, and Streamlit dashboard enhancements for the pneumonia classifier)
