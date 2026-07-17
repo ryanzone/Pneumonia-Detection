@@ -121,8 +121,8 @@ The dashboard provides:
 ## 📷 Dashboard Preview
 
 ### Main Dashboard
+![Enhanced](ss/up3.png)
 
-![Dashboard](ss/up1.png)
 
 ### Diagnosis View
 
@@ -130,7 +130,7 @@ The dashboard provides:
 
 ### Enhanced Image Analysis
 
-![Enhanced](ss/up3.png)
+![Dashboard](ss/up1.png)
 
 ### Previous UI
 
@@ -152,11 +152,9 @@ ICM/
 ├── ss/
 └── chest_xray/
 ```
-
 ---
 
 ## ⚙️ Installation
-
 Clone the repository:
 
 ```bash
@@ -165,21 +163,18 @@ cd ICM
 ```
 
 Create a virtual environment:
-
 ### Windows
 
 ```powershell
 python -m venv venv
 .\venv\Scripts\activate
 ```
-
 ### Linux/macOS
 
 ```bash
 python -m venv venv
 source venv/bin/activate
 ```
-
 Install dependencies:
 
 ```bash
@@ -187,7 +182,6 @@ pip install -r requirements.txt
 ```
 
 ---
-
 ## 🏋️ Training
 
 Download the Kaggle Chest X-Ray dataset and place it inside the project as:
@@ -197,7 +191,6 @@ chest_xray/
 ```
 
 Train the model:
-
 ```bash
 python model_arch.py
 ```
