@@ -132,7 +132,7 @@ The dashboard provides:
 
 ![Dashboard](ss/up1.png)
 
-
+---
 
 ### Previous UI
 
